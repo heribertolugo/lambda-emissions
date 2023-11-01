@@ -1,4 +1,4 @@
-# EmissionsLambda
+# Lambda Emissions
 **TLDR;** Calculates a gas engines Lambda rating (air:fuel ratio) based on a old equation used by VolksWagon that I found in an automotive magazine. It is one of the many variants of the Brettshneider equation. more info [here](https://www.austincc.edu/wkibbe/lambda.htm) or view [austincc.edu_wkibbe_lambda.htm.pdf](https://github.com/heribertolugo/EmissionsLambda/blob/main/austincc.edu_wkibbe_lambda.htm.pdf) or [09A_Alt-Fuels-Brettschneider-Series-3](https://github.com/heribertolugo/EmissionsLambda/blob/main/09A_Alt-Fuels-Brettschneider-Series-3.pdf)
 
 # Summary
