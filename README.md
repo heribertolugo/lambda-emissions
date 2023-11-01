@@ -10,6 +10,7 @@ The Lambda rating also tells you how far off the vehicle is from stoichiometry, 
 This knowledge can help diagnose a vehicle for emissions failures. An expensive diagnostic machine need not be used if you have the failed emissions report and access to this app.\
 A keen technician can claim to be able to determine rich or lean condition just by reading the failed emission report, but there are many scenarios where that judgement can be wrong.\
 
-you can use the following values to test: HC: 834 ppm, CO: .01%, CO2: 13.78%, O2: 2.29%
+you can use the following values to test: HC: 834 ppm, CO: .01%, CO2: 13.78%, O2: 2.29%\
+result should be: Lambda = 1.076, AFR = 15.817:1, Status = Lean
 
 ![image](https://github.com/heribertolugo/lambda-emissions/assets/26213368/cdfd093f-a3fc-4194-8402-ffe456fd5e52)
