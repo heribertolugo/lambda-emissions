@@ -1,27 +1,15 @@
-# LambdaEmissions
+# Lambda Emissions
+**TLDR;** Calculates a gas engines Lambda rating (air:fuel ratio) based on a old equation used by VolksWagon that I found in an automotive magazine. It is one of the many variants of the Brettshneider equation. more info [here](https://www.austincc.edu/wkibbe/lambda.htm) or view [austincc.edu_wkibbe_lambda.htm.pdf](https://github.com/heribertolugo/EmissionsLambda/blob/main/austincc.edu_wkibbe_lambda.htm.pdf) or [09A_Alt-Fuels-Brettschneider-Series-3](https://github.com/heribertolugo/EmissionsLambda/blob/main/09A_Alt-Fuels-Brettschneider-Series-3.pdf)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.8.
+# Summary
+This is a new working (in progress) version of an old app made circa 2005 for IE 5+. \
+The original version can be found [here](https://github.com/heribertolugo/EmissionsLambda).
 
-## Development server
+Using the Brettshneider Lambda equation, given a set of values, one could determine if the vehicle is running rich, lean or stoichiometric. \
+The Lambda rating also tells you how far off the vehicle is from stoichiometry, stoichiometric being 1 (optimal - perfect combustion with air/fuel ratio 14.7:1).\
+This knowledge can help diagnose a vehicle for emissions failures. An expensive diagnostic machine need not be used if you have the failed emissions report and access to this app.\
+A keen technician can claim to be able to determine rich or lean condition just by reading the failed emission report, but there are many scenarios where that judgement can be wrong.\
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+you can use the following values to test: HC: 834 ppm, CO: .01%, CO2: 13.78%, O2: 2.29%
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+![image](https://github.com/heribertolugo/lambda-emissions/assets/26213368/cdfd093f-a3fc-4194-8402-ffe456fd5e52)
