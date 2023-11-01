@@ -1,4 +1,4 @@
-import { TestBed, async, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { LambdacalculatorComponent } from './lambdacalculator/lambdacalculator.component';
@@ -10,98 +10,90 @@ import { SectionlogoComponent } from './sectionlogo/sectionlogo.component';
 import { LambdaequationComponent } from './lambdaequation/lambdaequation.component';
 import { SafeHtmlPipe } from './shared/pipes/SafeHtmlPipe';
 import { FormsModule } from '@angular/forms';
-import { Component } from '@angular/core';
 import { HelpComponent } from './help/help.component';
 import { Note } from './shared/models/note';
 
 describe('AppComponent', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [RouterTestingModule, FormsModule],
-    declarations: [
-      AppComponent,
-      LambdacalculatorComponent,
-      HeaderComponent,
-      NoteComponent,
-      BottomnavComponent,
-      LogobannerComponent,
-      SectionlogoComponent,
-      LambdacalculatorComponent,
-      LambdaequationComponent,
-      SafeHtmlPipe,
-      HelpComponent
-    ]
-  }));
+  let appFixture: ComponentFixture<AppComponent>;
+  let appInstance: AppComponent;
+  let appCompiled: HTMLElement;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule, FormsModule],
+      declarations: [
+        AppComponent,
+        LambdacalculatorComponent,
+        HeaderComponent,
+        NoteComponent,
+        BottomnavComponent,
+        LogobannerComponent,
+        SectionlogoComponent,
+        LambdacalculatorComponent,
+        LambdaequationComponent,
+        SafeHtmlPipe,
+        HelpComponent
+      ]
+    });
+
+    appFixture = TestBed.createComponent(AppComponent);
+    appInstance = appFixture.componentInstance;
+    appCompiled = appFixture.nativeElement as HTMLElement;
+  }
+  );
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    expect(appInstance).toBeTruthy();
   });
 
   it(`should have as title 'Lambda Diagnostics'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('Lambda Diagnostics');
+    expect(appInstance.title).toEqual('Lambda Diagnostics');
   });
 
   it('should toggle render NoteComponent. Initial is non-rendered', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('app-note')).toBeNull();
-    const instance = fixture.componentInstance;
-    instance.showNote();
-    fixture.detectChanges();
-    expect(instance.openNote).toBeTrue();
-    expect(compiled.querySelector('app-note')).toBeTruthy();
-    instance.setNote(new Note());
-    fixture.detectChanges();
-    expect(instance.openNote).toBeFalse();
-    expect(compiled.querySelector('app-note')).toBeNull();
+    appFixture.detectChanges();
+    expect(appCompiled.querySelector('app-note')).toBeNull(); // ensure it inits non-rendered
+    appInstance.showNote(); // call toggle to render
+    appFixture.detectChanges();
+    expect(appInstance.openNote).toBeTrue(); // ensure render flag is true
+    expect(appCompiled.querySelector('app-note')).toBeTruthy(); // ensure rendered
+    appInstance.setNote(new Note()); // call toggle to non-render
+    appFixture.detectChanges();
+    expect(appInstance.openNote).toBeFalse(); // ensure render flag is false
+    expect(appCompiled.querySelector('app-note')).toBeNull(); // ensure not rendered
   });
 
   it('should toggle render HelpComponent. Initial is non-rendered', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('app-help')).toBeNull();
-    const instance = fixture.componentInstance;
-    instance.showHelp();
-    fixture.detectChanges();
-    expect(instance.openHelp).toBeTrue();
-    expect(compiled.querySelector('app-help')).toBeTruthy();
-    instance.closeHelp();
-    fixture.detectChanges();
-    expect(instance.openHelp).toBeFalse();
-    expect(compiled.querySelector('app-help')).toBeNull();
+    appFixture.detectChanges();
+    expect(appCompiled.querySelector('app-help')).toBeNull(); // ensure it inits non-rendered
+    appInstance.showHelp(); // call toggle to render
+    appFixture.detectChanges();
+    expect(appInstance.openHelp).toBeTrue(); // ensure render flag is true
+    expect(appCompiled.querySelector('app-help')).toBeTruthy(); // ensure rendered
+    appInstance.closeHelp(); // call toggle to non-render
+    appFixture.detectChanges();
+    expect(appInstance.openHelp).toBeFalse(); // ensure render flag is false
+    expect(appCompiled.querySelector('app-help')).toBeNull(); // ensure not rendered
   });
 
   it('should render container div', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.page_container')).toBeTruthy();
+    appFixture.detectChanges();
+    expect(appCompiled.querySelector('.page_container')).toBeTruthy();
   });
 
   it('should render HeaderComponent', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.page_container header app-header')).toBeTruthy();
+    appFixture.detectChanges();
+    expect(appCompiled.querySelector('.page_container header app-header')).toBeTruthy();
   });
 
   it('should render LambdaCalculatorComponent', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.page_container main app-lambdacalculator')).toBeTruthy();
+    appFixture.detectChanges();
+    expect(appCompiled.querySelector('.page_container main app-lambdacalculator')).toBeTruthy();
   });
 
   it('should render BottomnavComponent', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.page_container footer app-bottomnav')).toBeTruthy();
+    appFixture.detectChanges();
+    expect(appCompiled.querySelector('.page_container footer app-bottomnav')).toBeTruthy();
   });
 
   it('should set note and groupName for NoteComponent using current active Group', () => {
