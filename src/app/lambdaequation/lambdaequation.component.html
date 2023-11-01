@@ -1,0 +1,95 @@
+<div class="lambda"><img src="/assets/images/lamEq.gif"></div>
+<div class="equation rows">
+    <div class="equation_terms_top term_numerator">        
+        <div class="term_col">[</div>
+        <div class="term_col" [innerHTML]="(lambdaValues.Co2) || (toChemical(lambdaValueTypes.Co2) | safeHtml)"></div> <!-- first term -->
+        <div class="term_col">]<span class="operand">+</span></div>
+        <div class="term_col"> <!-- second term -->
+            <div class="term_group"> <!-- wrapper to limit bracket height -->
+                <div class="term_left_bracket term_bracket term_col"></div> <!-- left bracket -->
+                <div class="term_col"> <!-- actual term -->
+                    <div class="rows">
+                        <div class="term_numerator">{{(lambdaValues.Co) || toChemical(lambdaValueTypes.Co)}}</div> <!-- top term -->
+                        <div class="term_denominator">2</div> <!-- bottom term -->
+                    </div>
+                </div>
+                <div class="term_right_bracket term_bracket term_col"></div> <!-- right bracket -->
+            </div>
+        </div>
+        <div class="term_col"><span class="operand">+</span>[</div>
+        <div class="term_col" [innerHTML]="(lambdaValues.O2) || (toChemical(lambdaValueTypes.O2) | safeHtml)"></div> <!-- third term -->
+        <div class="term_col">]<span class="operand">+</span></div>
+        <div class="term_col"><img src="/assets/images/par.gif" width="10" height="100"></div> <!-- left parens 1 -->
+        <div class="term_col"><img src="/assets/images/par.gif" width="10" height="90"></div> <!-- left parens 2 -->
+        <div class="term_col"><img src="/assets/images/par.gif" width="10" height="80"></div> <!-- left parens 3 -->
+        <div class="term_col"> <!-- fourth term -->
+            <div class="rows">
+                <div class="term_numerator">{{lambdaValues.isValid() ? lambdaValues.Hcv : lambdaValueTypes.Hcv.toUpperCase()}}</div> <!-- top term -->
+                <div class="term_denominator">4</div> <!-- bottom term -->
+            </div>
+        </div>
+        <div class="term_col"><span class="operand">&#xD7;</span></div> <!-- multiply 4th & 5th terms -->
+        <div class="term_col"><!-- fifth term -->
+            <div class="rows">
+                <div class="term_numerator">{{lambdaValues.K}}</div> <!-- top term -->
+                <div class="term_denominator">
+                    <div class="term_col"> <!-- bottom term -->
+                        <div class="term_col">{{lambdaValues.K}}<span class="operand">+</span></div> <!-- left hand -->
+                        <div class="term_col"> <!-- left hand -->
+                            <div class="rows">
+                                <div class="term_numerator"> <!-- top term -->
+                                    <div class="term_col">[</div>
+                                    <div class="term_col" [innerHTML]="(lambdaValues.Co) || (toChemical(lambdaValueTypes.Co) | safeHtml)"></div>
+                                    <div class="term_col">]</div>
+                                </div>
+                                <div class="term_denominator"> <!-- bottom term -->
+                                    <div class="term_col">[</div>
+                                    <div class="term_col" [innerHTML]="(lambdaValues.Co2) || (toChemical(lambdaValueTypes.Co2) | safeHtml)"></div>
+                                    <div class="term_col">]</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>         
+            </div>   
+        </div>
+        <div class="term_col"><img src="/assets/images/par2.gif" width="10" height="80"></div> <!-- right parens 1 -->
+        <div class="term_col"><span class="operand">&#8722;</span></div> <!-- subtract 5th & 6th terms -->
+        <div class="term_col"> <!-- 6th terms-->
+            <div class="rows">
+                <div class="term_numerator">{{lambdaValues.isValid() ? lambdaValues.Ocv : lambdaValueTypes.Ocv.toUpperCase()}}</div> <!-- top term -->
+                <div class="term_denominator">2</div> <!-- bottom term -->
+            </div>
+        </div>
+        <div class="term_col"><img src="/assets/images/par2.gif" width="10" height="90"></div> <!-- right parens 2 -->
+        <div class="term_col"><span class="operand">&#xD7;</span>( [</div> <!-- 7th & 8th terms -->
+        <div class="term_col" [innerHTML]="(lambdaValues.Co2) || (toChemical(lambdaValueTypes.Co2) | safeHtml)"></div> <!-- 7th terms -->
+        <div class="term_col">]<span class="operand">+</span>[{{(lambdaValues.Co) || lambdaValueTypes.Co.toUpperCase()}}] )</div> <!-- 8th terms -->
+        <div class="term_col"><img src="/assets/images/par2.gif" width="10" height="100"></div> <!-- right parens 3 -->
+    </div>
+    <div class="equation_terms_bottom term_denominator">
+        <div class="term_col"><img src="/assets/images/par.gif" width="10" height="50"></div>
+        <div class="term_col">1<span class="operand">+</span></div>
+        <div class="term_col">
+            <div class="rows">
+                <div class="term_numerator">{{lambdaValues.isValid() ? lambdaValues.Hcv : lambdaValueTypes.Hcv.toUpperCase()}}</div> <!-- top term -->
+                <div class="term_denominator">4</div> <!-- bottom term -->
+            </div>
+        </div>
+        <div class="term_col"><span class="operand">&#8722;</span></div>
+        <div class="term_col">
+            <div class="rows">
+                <div class="term_numerator">{{lambdaValues.isValid() ? lambdaValues.Ocv : lambdaValueTypes.Ocv.toUpperCase()}}</div> <!-- top term -->
+                <div class="term_denominator">2</div> <!-- bottom term -->
+            </div>
+        </div>
+        <div class="term_col"><img src="/assets/images/par2.gif" width="10" height="50"></div>
+        <div class="term_col"><span class="operand">&#xD7;</span>( [</div> 
+        <div class="term_col">{{(lambdaValues.Co) || lambdaValueTypes.Co.toUpperCase()}}</div>
+        <div class="term_col">]<span class="operand">+</span>[</div>
+        <div class="term_col" [innerHTML]="(lambdaValues.Co2) || (toChemical(lambdaValueTypes.Co2) | safeHtml)"></div> 
+        <div class="term_col">]<span class="operand">+</span>(&nbsp;</div> 
+        <div class="term_col" [innerHTML]="lambdaValues.isValid() ? lambdaValues.K1 : (toChemical(lambdaValueTypes.K1) | safeHtml)"></div>
+        <div class="term_col"><span class="operand">&#xD7;</span>[{{(lambdaValues.Hc) || lambdaValueTypes.Hc.toUpperCase()}}] ) )</div>
+    </div>
+</div>

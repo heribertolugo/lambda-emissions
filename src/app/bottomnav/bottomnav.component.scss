@@ -1,0 +1,132 @@
+@use 'sass:list';
+
+$first_row_odd_widths: 36px, '', 14px, '', 14px, '', 14px, '', 70px;
+$lambda-comparisons_buttons: 'lamBut', 'idleBut', 'cruiseBut', 'cusBut';
+
+:host {
+    button {
+        border: 0;
+        cursor: pointer;
+    }
+    .container {    
+        background-color:  #000;
+        padding-top: 8px;
+        padding-left: 8px;
+        padding-right: 8px;
+        padding-bottom: 0;
+        overflow: hidden;
+
+        .row-1 .col {
+            height: 44px;
+        }
+        .row-2 .col {
+            height: 10px;
+        }
+        .row-3 .col, .row-3 .col button {
+            height: 36px;
+        }
+        .row-1 .col:nth-child(even), .row-2 .col:nth-child(even), .row-3 .col:nth-child(even), 
+        .row-3 .col:nth-child(even) button {
+            width: 94px;
+        }
+        .lambda-comparisons-column, .misc-column {
+            margin-bottom: -4px;
+        }
+
+        .lambda-comparisons-column {
+            $column_length: 9;
+            $column_count_bottom: 0;
+            $lambda-comparisons_button: 1;
+            @for $i from 1 through $column_length {
+                .row-1 .column-#{$i} {
+                    background-image: url('/assets/images/nav#{$i}.gif');
+                    @if $i % 2 != 0 {
+                        width: list.nth($first_row_odd_widths, $i);
+                    }
+                }
+                .row-2 .column-#{$i} {
+                    background-image: url('/assets/images/nav#{$i+$column_length}.gif');
+                    @if $i % 2 != 0 {
+                        width: list.nth($first_row_odd_widths, $i);
+                    }
+                }
+                .row-3 .column-#{$i} {
+                    @if $i % 2 != 0 {
+                        $column_count_bottom: $column_count_bottom + 1;
+                        background-image: url('/assets/images/nav#{$column_count_bottom+($column_length*2)}.gif');
+                        width: list.nth($first_row_odd_widths, $i);
+                    } @else {
+                        button {
+                            background-image: url('/assets/images/#{list.nth($lambda-comparisons_buttons, $lambda-comparisons_button)}.gif');
+                        }
+                        button:hover {
+                            background-image: url('/assets/images/#{list.nth($lambda-comparisons_buttons, $lambda-comparisons_button)}Over.gif');
+                        }
+                        $lambda-comparisons_button: $lambda-comparisons_button + 1;
+                    }
+                }
+            }
+            .row-4 .column-1 {
+                height: 47px;
+                background-image: url('/assets/images/nav24.gif');
+                flex-grow: 1;
+            }
+        }
+
+        .misc-column {
+            .row-1 {
+                button, .col {
+                    height: 44px;
+                }
+                .column-1 {
+                    button {
+                        background-image: url('/assets/images/noteBut.gif');
+                        width: 151px;
+                    }
+                    button:hover {
+                        background-image: url('/assets/images/noteButOver.gif');
+                    }
+                }
+                .column-2 {
+                    button {
+                        background-image: url('/assets/images/prntBut.gif');
+                        width: 125px;
+                    }
+                    button:hover {
+                        background-image: url('/assets/images/prntButOver.gif');
+                    }
+                }
+            }
+            .row-2 {
+                button, .col {
+                    height: 46px;
+                }
+                .column-1 {
+                    button {
+                        background-image: url('/assets/images/helpBut.gif');
+                        width: 182px;
+                    }
+                    button:hover {
+                        background-image: url('/assets/images/helpButOver.gif');
+                    }
+                }
+                .column-2 {
+                    button {
+                        background-image: url('/assets/images/exitBut.gif');
+                        width: 94px;
+                    }
+                    button:hover {
+                        background-image: url('/assets/images/exitButOver.gif');
+                    }
+                }
+            }
+            .row-3 {
+                .column-1 {
+                    background-image: url('/assets/images/nav25.gif');
+                    width: 276px;
+                    height: 47px;
+                }
+            }
+        }
+    }
+}

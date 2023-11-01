@@ -1,0 +1,206 @@
+@import'./../../styles.scss';
+
+$bg_dark: #00334c;
+$bg_light: #135a7d;
+$bg_mid: #003366;
+$button_border-highlight: #d8d8d8;
+$button_border-shadow: #555353;
+$button_color-hover: #555353;
+$button_bg-hover: #55c2f3;
+$button_bg: #c0c0c0;
+
+
+:host {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 14px;
+    font-style: normal;
+    line-height: normal;
+    font-weight: bold;
+    font-variant: normal;
+    text-transform: none;
+    color: #000;
+    text-decoration: none;
+
+    .col-2 {
+        flex-grow: 1;
+    }
+
+    .row-1 {
+        margin-left: 125px;
+    }
+    .row-2 {
+        height: 40px;
+        padding-left: 175px;
+        background-image: url('/assets/images/TL.gif');
+        background-repeat: no-repeat;
+    }
+    .row-3 { 
+        .col-1 {
+            background-image: url('/assets/images/TL2.gif');
+            background-repeat: no-repeat;
+            height: 25px;
+            width: 218px;
+        }
+        .col-2 {
+            background-image: url('/assets/images/Top.gif');
+            background-repeat: repeat-x;
+            background-color: $bg_dark;
+            position: relative;
+    
+            img {
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+        }
+        .col-3 {
+            background-image: url('/assets/images/TRcorner.gif');
+            @include bg-nr_w32h25;
+        }
+    }    
+    
+    .row-4 {        
+        .col-1 {
+            background-image: url('/assets/images/Left.gif');
+            background-repeat: repeat-y;
+            width: 26px;
+            align-items: stretch;
+        }
+        .col-2 {
+            .equation-container {
+                background-color: $bg_mid;
+                background-image: url('/assets/images/EQbg.gif');
+                background-repeat: repeat;
+    
+                .ec_row-1 {
+                    .ec_col-1 {
+                        background-image: url('/assets/images/TLeq.gif');
+                        @include bg-nr_wh-50;                    
+                    }
+                    .ec_col-2 {
+                        background-image: url('/assets/images/TopEq.gif');
+                        background-repeat: repeat-x;
+                        margin-right: 0;
+                        height: 50px;
+                    }
+                    .ec_col-3 {
+                        background-image: url('/assets/images/TReq.gif');
+                        @include bg-nr_wh-50;
+                    }
+                }
+                .ec_row-2 {
+                    .ec_col-1 {
+                        background-image: url('/assets/images/LeftEq.gif');
+                        background-repeat: repeat-y;
+                        width: 50px;
+                        align-items: stretch;
+                    }
+                    .ec_col-2 {
+                        display:flex;
+                        justify-content:center;
+                    }
+                    .ec_col-3 {
+                        background-image: url('/assets/images/RightEq.gif');
+                        background-repeat: repeat-y;
+                        width: 50px;
+                        align-items: stretch;
+                    }
+                }
+                .ec_row-3 {
+                    .ec_col-1 {
+                        background-image: url('/assets/images/BLeq.gif');
+                        @include bg-nr_wh-50;
+                        align-items: stretch;
+                    }
+                    .ec_col-2 {
+                        background-image: url('/assets/images/BotEq.gif');
+                        background-repeat: repeat-x;
+                        height: 50px;
+                    }
+                    .ec_col-3 {
+                        background-image: url('/assets/images/BReq.gif');
+                        @include bg-nr_wh-50;
+                    }
+                }
+            }
+        }
+
+        .col-3 {
+            background-image: url('/assets/images/Right.gif');
+            background-repeat: repeat-y;
+            width: 32px;
+            align-items: stretch;
+        }
+    }
+    
+    .row-5 {
+        .col-1 {
+            background-image: url('/assets/images/BLcorner.gif');
+            @include bg-nr_w32h25;
+        }
+        .col-2 {
+            background-image: url('/assets/images/Bot.gif');
+            background-repeat: repeat-x;
+            height: 25px;
+        }
+        .col-3 {
+            background-image: url('/assets/images/BRcorner.gif');
+            @include bg-nr_w32h25;
+        }
+    }
+
+    .results {
+        background-color: #000;
+        font-size: 24px;
+        font-style: normal;
+        line-height: normal;
+        font-weight: bold;
+        font-variant: normal;
+        text-transform: uppercase;
+        color: #FF0000;
+        text-decoration: none;
+        padding-top: 35px;
+        padding-bottom: 35px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .result {
+            display: inline-block;
+            min-width: 5rem;
+            padding: 0 1rem;
+
+            .result_label-lambda {
+                text-transform: none;
+                font-size: 30px;
+            }
+        }
+    }
+
+    .form_button {
+        font-family: sans-serif;
+        display: inline-block;
+        margin: 0 1rem;
+        text-decoration: none;
+        font-size: 0.75rem;
+        font-weight: normal;
+        border-right: thin solid $button_border-shadow;
+        border-bottom: thin solid $button_border-shadow;
+        border-left: thin solid $button_border-highlight;
+        border-top: thin solid $button_border-highlight;
+        background-color: $button_bg;
+        padding: 0.25rem 1rem;
+        cursor: pointer;
+    }
+
+    .form_button:hover {
+        border-right: thin solid $button_border-highlight;
+        border-bottom:  thin solid $button_border-highlight;
+        border-left: thin solid $button_border-shadow;
+        border-top: thin solid $button_border-shadow;
+        color: $button_color-hover;
+        background-color: $button_bg-hover;
+        font-size: 0.7rem;
+        margin-right: 1.15rem;
+    }
+}

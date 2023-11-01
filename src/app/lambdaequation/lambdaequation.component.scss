@@ -1,0 +1,90 @@
+$foreground: #ccc;
+$linewidth: 2px;
+
+:host {
+    font-family: Geneva, Arial, Helvetica, san-serif;
+    font-size: 16px;
+    font-style: normal;
+    line-height: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    color: $foreground;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    align-items: center;
+    justify-content: center;
+
+    .lambda {
+        padding-right: 2rem;
+    }
+
+    .equation_terms_top, .equation_terms_bottom {
+        display: flex !important;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: stretch;
+        justify-content: center;
+    }
+
+    .term_col {
+        align-self: stretch;
+        display: inline-flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: .02rem;
+    }
+
+    .term_rows {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .term_group {
+        display: inline-flex;;
+    }
+
+    .term_numerator {
+        border-bottom: $linewidth solid $foreground;
+        display: block;
+        text-align: center;
+        padding-bottom: .2rem;
+    }
+
+    .term_denominator {
+        border-top: 0 solid $foreground;
+        display: block;
+        text-align: center;
+        padding-top: .2rem;
+    }
+
+    .operand {
+        padding: 0 .5rem;
+        font-weight: 600;
+    }
+
+    .term_bracket {
+        border-top: $linewidth solid $foreground;
+        border-bottom: $linewidth solid $foreground;
+        width: .15rem;
+        align-self: stretch;
+    }
+
+    .term_left_bracket {
+        border-left: $linewidth solid $foreground;
+    }
+
+    .term_right_bracket {
+        border-right: $linewidth solid $foreground;
+    }
+}
+
+    .chemical_sub {
+        font-family: "Geneva, Arial, Helvetica, san-serif"; 
+        font-size: 12px; 
+        vertical-align: sub;
+    }

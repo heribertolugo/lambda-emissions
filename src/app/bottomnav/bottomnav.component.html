@@ -1,0 +1,33 @@
+<div class="container row">
+    <div class="col lambda-comparisons-column">
+        <div *ngFor="let item of [].constructor(3); let row = index" class="row row-{{row+1}}">
+            <div *ngFor="let item of [].constructor(9); let column = index" class="col column-{{column+1}}">
+                <button *ngIf="row == 2 && column % 2 != 0" type="button" title="Set comparison to {{groups[column]}}" (click)="setComparisonGroup(groups[column])"></button>
+            </div>
+        </div>
+        <div class="row row-4">
+            <div class="col column-1"></div>
+        </div>
+    </div>
+    <div class="col misc-column">
+        <div class="row row-1">
+            <div class="col column-1">
+                <button type="button" title="Create a note for active comparison" (click)="showNote()"></button>
+            </div>
+            <div class="col column-2">
+                <button type="button" title="Print the comparisons"></button>
+            </div>
+        </div>
+        <div class="row row-2">
+            <div class="col column-1">
+                <button type="button" title="Help" (click)="showHelp()"></button>
+            </div>
+            <div class="col column-2">
+                <button type="button" title="Exit"></button>
+            </div>
+        </div>
+        <div class="row row-3">
+            <div class="col column-1"></div>
+        </div>
+    </div>
+</div>

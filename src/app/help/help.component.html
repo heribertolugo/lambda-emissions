@@ -1,0 +1,22 @@
+<div class="titlebar">
+    <div class="close" (click)="close()" title="close">X</div>
+</div>
+<div class="container">
+    <div class="faq">
+        <div *ngFor="let item of faq | keyvalue: originalOrder; let index = index" [ngClass]="{'active': activeFaq == index}" (click)="setActive(index)">
+            {{item.key}}
+        </div>
+    </div>
+    <div class="qaf">
+        <div *ngFor="let item of faq | keyvalue: originalOrder; let index = index" [ngClass]="{'hidden': activeFaq != index}" 
+            [innerHTML]="item.value | safeHtml">
+            
+        </div>
+    </div>
+</div>
+<svg>
+    <filter id="wavy2">
+      <feTurbulence x="0" y="0" baseFrequency="0.02" numOctaves="5" seed="1" />
+      <feDisplacementMap in="SourceGraphic" scale="20" />
+    </filter>
+  </svg>

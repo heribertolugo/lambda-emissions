@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="title">
+        {{groupName}}
+        <div class="close" (click)="close()" title="close and save note">X</div>
+    </div>
+    <div class="note">
+        <textarea rows="10" [(ngModel)]="note.value" placeholder="Enter note/comment here for {{groupName}}"></textarea>
+    </div>
+    <div class="print">
+        <input type="checkbox" [(ngModel)]="note.isPrintable">
+        check to add to final print.
+    </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="instructions">&nbsp;&nbsp;Enter your values:</div>
+<div class="row row-1">
+    <div>
+        <span *ngFor="let item of lambdaValueGasses | keyvalue: originalOrder; let index = index" [ngSwitch]="item.value">
+            &nbsp;{{item.value.toUpperCase()}}:&nbsp;
+            <input type="number" min=".000" max="999" name="{{item.value.toLowerCase()}}In" size="5" maxlength="5" tabindex="{{index + 1}}" 
+                (onblur)="getVal(false, lambdaGroup.Lambda,'{{item.value.toLowerCase()}}')" 
+                (onfocus)="nextVal(false, index + 1 ,'{{item.value.toLowerCase()}}')" 
+                [(ngModel)]="lambdaValues[item.value]"/>
+            <span *ngSwitchCase="lambdaValueTypes.Hc"> ppm</span><span *ngSwitchDefault> %</span>&nbsp;&nbsp;&nbsp;
+        </span>
+    </div>
+</div>
+<div class="row row-2">
+    <div>
+        <span *ngFor="let item of lambdaValueConsts | keyvalue: originalOrder; let index = index">
+            &nbsp;{{item.value.toUpperCase()}}:&nbsp;
+            <input type="number" min=".000" max="999" name="{{item.value.toLowerCase()}}In" size="5" maxlength="5" tabindex="{{index + lambdaValueGasses.length + 1}}" 
+                (onblur)="getVal(false, lambdaGroup.Lambda,'{{item.value.toLowerCase()}}')" 
+                (onfocus)="nextVal(false, index + lambdaValueGasses.length + 1 ,'{{item.value.toLowerCase()}}')" 
+                [(ngModel)]="lambdaValues[item.value]" />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+        </span>
+        <button type="button" class="form_button" tabindex="8" (click)="calcIt()">Submit</button><button type="button" class="form_button" tabindex="9" (click)="reset()">Reset</button>
+    </div>
+</div>
+<div class="row row-frame row-3">
+    <div class="col-frame col-1"></div>
+    <div class="col-main col-2"><img src="/assets/images/TopBgSpacer.gif"></div>
+    <div class="col-frame col-3"></div>
+</div>
+<div class="row row-4">
+    <div class="col-frame col-1"></div>
+    <div class="col-main col-2">
+        <div class="equation-container">
+            <div class="ec_row-1 row">
+                <div class="ec_col-1 col"></div><div class="ec_col-2 col col-2"></div><div class="ec_col-3 col"></div>
+            </div>
+            <div class="ec_row-2 row">
+                <div class="ec_col-1 col"></div><div class="ec_col-2 col col-2"><app-lambdaequation></app-lambdaequation></div><div class="ec_col-3 col"></div>
+            </div>
+            <div class="ec_row-3 row">
+                <div class="ec_col-1 col"></div><div class="ec_col-2 col col-2"></div><div class="ec_col-3 col"></div>
+            </div>
+        </div>        
+    </div>
+    <div class="col-frame col-3"></div>
+</div>
+<div class="row row-frame row-5">
+    <div class="col-frame col-1"></div>
+    <div class="col-main col-2"></div>
+    <div class="col-frame col-3"></div>
+</div>
+<div class="row results">
+    <div>
+        <div class="result"><span class="result_label result_label-lambda"><!--<img src="/assets/images/lambda.gif" />-->&lambda; = </span><span class="result_lambda" [attr.data-countdown]="lambdaValues">{{lambdaValues.Lambda}}</span></div> <!-- Lambda Result -->
+        <div class="result"><span class="result_label result_label-afr">afr = </span><span class="result_afr">{{lambdaValues.Afr}}</span></div> <!-- AFR Result -->
+        <div class="result"><span class="result_label result_label-status">status = </span><span class="result_status">{{lambdaValues.Status}}</span></div> <!-- Status Result -->
+    </div>
+</div>
