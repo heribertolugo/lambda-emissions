@@ -154,7 +154,7 @@ describe('AppComponent', () => {
       .not.toBeNull();
     expect(groupData?.note)
       .withContext('GroupData.Note was null').not.toBeNull()
-    let note: Note = groupData!.note;
+    let note: Note = groupData?.note ?? new Note();
     const noteText: string = 'this is a test, this is only a test.';
     note.value = noteText;
     note.isPrintable = true;
