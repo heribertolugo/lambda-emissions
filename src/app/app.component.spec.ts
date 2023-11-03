@@ -18,6 +18,8 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { LambdaValues } from './shared/models/lambdaValues';
 import { ILambdaValues } from './shared/models/IlambdaValues';
+import { LambdaResult } from './shared/models/lambdaResult';
+import { group } from '@angular/animations';
 
 describe('AppComponent', () => {
   let appFixture: ComponentFixture<AppComponent>;
@@ -57,29 +59,6 @@ describe('AppComponent', () => {
     expect(appInstance.title).toEqual('Lambda Diagnostics');
   });
 
-  it('should toggle render NoteComponent. Initial is non-rendered', () => {
-    appFixture.detectChanges();
-    expect(appCompiled.querySelector('app-note'))
-      .withContext('note was not hidden by default').toBeNull(); // ensure it inits non-rendered
-    appInstance.showNote(); // call toggle to render
-    expect(appInstance.openNote).toBeTrue(); // ensure render flag is true
-    expect(appCompiled.querySelector('app-note')).toBeDefined(); // ensure rendered
-    appInstance.setNote(new Note()); // call toggle to non-render
-    expect(appInstance.openNote).toBeFalse(); // ensure render flag is false
-    expect(appCompiled.querySelector('app-note')).toBeNull(); // ensure not rendered
-  });
-
-  it('should toggle render HelpComponent. Initial is non-rendered', () => {
-    appFixture.detectChanges();
-    expect(appCompiled.querySelector('app-help')).toBeNull(); // ensure it inits non-rendered
-    appInstance.showHelp(); // call toggle to render
-    expect(appInstance.openHelp).toBeTrue(); // ensure render flag is true
-    expect(appCompiled.querySelector('app-help')).toBeDefined(); // ensure rendered
-    appInstance.closeHelp(); // call toggle to non-render
-    expect(appInstance.openHelp).toBeFalse(); // ensure render flag is false
-    expect(appCompiled.querySelector('app-help')).toBeNull(); // ensure not rendered
-  });
-
   it('should render container div', () => {
     expect(appCompiled.querySelector('.page_container')).toBeDefined();
   });
@@ -94,21 +73,6 @@ describe('AppComponent', () => {
 
   it('should render BottomnavComponent', () => {
     expect(appCompiled.querySelector('.page_container footer app-bottomnav')).toBeDefined();
-  });
-
-  it('should set note and groupName for NoteComponent using current active Group', () => {
-    appInstance.showNote();
-    appFixture.detectChanges();
-    let noteDebug: DebugElement = appFixture.debugElement.query(By.directive(NoteComponent));
-    //let noteFixture: ComponentFixture<NoteComponent> = TestBed.createComponent(NoteComponent);
-    let noteInstance: NoteComponent = noteDebug.componentInstance; //noteFixture.componentInstance;
-    let activeGroup: Group = appInstance.getComparisonGroup();
-    let groupData: GroupData | undefined = appInstance['comparisons'].get(activeGroup); 
-    expect(groupData).toBeDefined();
-    let note: Note = groupData!.note;
-    appInstance.loadNoteIntoComponent(noteInstance);
-    expect(noteInstance.groupName).toEqual(activeGroup);
-    expect(noteInstance.note).toEqual(note);
   });
 
   it('should set current active group', () => {
@@ -129,10 +93,71 @@ describe('AppComponent', () => {
     expect(initialGroup).withContext('initialGroup isnt truthy').toBeDefined();
     appFixture.detectChanges();
     for (const group of Object.values(Group).filter(g => g != initialGroup)) {
-      appInstance['updateGroupLogo'](group);
+      //appInstance['updateGroupLogo'](group);
+      appInstance.setComparisonGroup(group);
       expect(sectionLogoDebug.componentInstance.logoUrl).withContext('logo url did not change').not.toEqual(activeLogo);
       activeLogo = sectionLogoDebug.componentInstance.logoUrl;
     }
+  });
+  // #endregion
+
+  // #region Integration Tests
+
+  it('should toggle render NoteComponent. Initial is non-rendered', () => {
+    appFixture.detectChanges();
+    expect(appCompiled.querySelector('app-note'))
+      .withContext('note was not hidden by default').toBeNull(); // ensure it inits non-rendered
+    appInstance.showNote(); // call toggle to render
+    expect(appInstance.openNote)
+      .withContext('the openNote property did not update to true. Will cause HTML bindings to work improperly')
+      .toBeTrue(); // ensure render flag is true
+    expect(appCompiled.querySelector('app-note'))
+      .withContext('the note Component was not updated to be visible').toBeDefined(); // ensure rendered
+    appInstance.setNote(new Note()); // call toggle to non-render
+    expect(appInstance.openNote)
+      .withContext('the openNote property did not update to false. Will cause HTML bindings to work improperly')
+      .toBeFalse(); // ensure render flag is false
+    expect(appCompiled.querySelector('app-note'))
+      .withContext('the note Component was not updated to be hidden').toBeNull(); // ensure not rendered
+  });
+
+  it('should toggle render HelpComponent. Initial is non-rendered', () => {
+    appFixture.detectChanges();
+    expect(appCompiled.querySelector('app-help'))
+      .withContext('help was not hidden by default').toBeNull(); // ensure it inits non-rendered
+    appInstance.showHelp(); // call toggle to render
+    expect(appInstance.openHelp)
+      .withContext('the openHelp property did not update to true. Will cause HTML bindings to work improperly')
+      .toBeTrue(); // ensure render flag is true
+    expect(appCompiled.querySelector('app-help'))
+      .withContext('the help Component was not updated to be visible')
+      .toBeDefined(); // ensure rendered
+    appInstance.closeHelp(); // call toggle to non-render
+    expect(appInstance.openHelp)
+      .withContext('the openHelp property did not update to false. Will cause HTML bindings to work improperly')
+      .toBeFalse(); // ensure render flag is false
+    expect(appCompiled.querySelector('app-help'))
+      .withContext('the help Component was not updated to be hidden')
+      .toBeNull(); // ensure not rendered
+  });
+
+  it('should set note and groupName for NoteComponent using current active Group', () => {
+    appInstance.showNote();
+    appFixture.detectChanges();
+    let noteDebug: DebugElement = appFixture.debugElement.query(By.directive(NoteComponent));
+    //let noteFixture: ComponentFixture<NoteComponent> = TestBed.createComponent(NoteComponent);
+    let noteInstance: NoteComponent = noteDebug.componentInstance; //noteFixture.componentInstance;
+    let activeGroup: Group = appInstance.getComparisonGroup();
+    let groupData: GroupData | null = appInstance.getGroupValues(activeGroup); 
+    expect(groupData).not.toBeNull();
+    expect(groupData?.note).not.toBeNull()
+    let note: Note = groupData!.note;
+    const noteText = 'this is a test, this is only a test.';
+    note.value = noteText;
+    note.isPrintable = true;
+    appInstance.loadNoteIntoComponent(noteInstance);
+    expect(noteInstance.groupName).toEqual(activeGroup);
+    expect(JSON.stringify(noteInstance.note)).toEqual(JSON.stringify(note));
   });
 
   it('should set lambda values for the current group', () => {
@@ -140,20 +165,13 @@ describe('AppComponent', () => {
     const testEqual: string = JSON.stringify(testValues);
     
     for (const group of Object.values(Group)) {
-      if (!appInstance['comparisons'].has(group))
-        appInstance['comparisons'].set(group, new GroupData(group, new LambdaValues()));
-        appInstance['activeGroup'] = group;
+      appInstance.setComparisonGroup(group);
       appInstance.updateLambdaValues(testValues);
-      expect(JSON.stringify(appInstance['comparisons']
-        .get(group)?.lambdaValues)).withContext(`${group} was not equal`)
+      const data = appInstance.getGroupValues(group);
+      expect(data).withContext('group data returned was null').not.toBeNull();
+      expect(JSON.stringify(data?.lambdaValues)).withContext(`${group} was not equal`)
         .toEqual(testEqual);
     }
   });
-
-  it('should set calculator component values to the values in provided group', () => {
-    /** @TODO updateCalculator(val: Group) */
-  });
   // #endregion
-
-  
 });
