@@ -1,3 +1,4 @@
+import { ILambdaValues } from "./IlambdaValues";
 import { LambdaValues } from "./lambdaValues";
 
 export class LambdaResult extends LambdaValues {
