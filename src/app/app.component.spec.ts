@@ -149,15 +149,20 @@ describe('AppComponent', () => {
     let noteInstance: NoteComponent = noteDebug.componentInstance; //noteFixture.componentInstance;
     let activeGroup: Group = appInstance.getComparisonGroup();
     let groupData: GroupData | null = appInstance.getGroupValues(activeGroup); 
-    expect(groupData).not.toBeNull();
-    expect(groupData?.note).not.toBeNull()
+    expect(groupData)
+      .withContext('groupData was null')
+      .not.toBeNull();
+    expect(groupData?.note)
+      .withContext('GroupData.Note was null').not.toBeNull()
     let note: Note = groupData!.note;
-    const noteText = 'this is a test, this is only a test.';
+    const noteText: string = 'this is a test, this is only a test.';
     note.value = noteText;
     note.isPrintable = true;
     appInstance.loadNoteIntoComponent(noteInstance);
-    expect(noteInstance.groupName).toEqual(activeGroup);
-    expect(JSON.stringify(noteInstance.note)).toEqual(JSON.stringify(note));
+    expect(noteInstance.groupName)
+      .withContext('group in Note is not active group in app').toEqual(activeGroup);
+    expect(JSON.stringify(noteInstance.note))
+      .withContext('note text &/or print status did not get set to note').toEqual(JSON.stringify(note));
   });
 
   it('should set lambda values for the current group', () => {
@@ -167,9 +172,10 @@ describe('AppComponent', () => {
     for (const group of Object.values(Group)) {
       appInstance.setComparisonGroup(group);
       appInstance.updateLambdaValues(testValues);
-      const data = appInstance.getGroupValues(group);
+      const data: GroupData | null = appInstance.getGroupValues(group);
       expect(data).withContext('group data returned was null').not.toBeNull();
-      expect(JSON.stringify(data?.lambdaValues)).withContext(`${group} was not equal`)
+      expect(JSON.stringify(data?.lambdaValues))
+        .withContext(`lambda values in group ${group} was not equal`)
         .toEqual(testEqual);
     }
   });
