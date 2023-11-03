@@ -10,9 +10,9 @@ export class GroupData {
     private _note: Note;
     private _fixes: Array<ILambdaValues>;
 
-    constructor(group: Group, lmbdaValues?: ILambdaValues) {
-        if (this.lambdaValues)
-            this._lambdaValues = this.lambdaValues;
+    constructor(group: Group, lambdaValues?: ILambdaValues) {
+        if (lambdaValues)
+            this._lambdaValues = lambdaValues;
         else this._lambdaValues = null;
         this._group = group;
         this._note = new Note();
