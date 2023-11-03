@@ -18,8 +18,6 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { LambdaValues } from './shared/models/lambdaValues';
 import { ILambdaValues } from './shared/models/IlambdaValues';
-import { LambdaResult } from './shared/models/lambdaResult';
-import { group } from '@angular/animations';
 
 describe('AppComponent', () => {
   let appFixture: ComponentFixture<AppComponent>;
@@ -84,18 +82,16 @@ describe('AppComponent', () => {
 
   it('should set group logo using group provided', () => {
     let headerDebug: DebugElement = appFixture.debugElement.query(By.directive(HeaderComponent));
-    expect(headerDebug).withContext('headerDebug isnt truthy').toBeDefined();
+    expect(headerDebug).withContext('headerDebug isnt found').toBeDefined();
     let sectionLogoDebug: DebugElement = headerDebug.query(By.directive(SectionlogoComponent));
-    expect(sectionLogoDebug).withContext('sectionLogoDebug isnt truthy').toBeDefined();
+    expect(sectionLogoDebug).withContext('sectionLogoDebug isnt found').toBeDefined();
     let activeLogo: string = sectionLogoDebug.componentInstance.logoUrl;
-    expect(activeLogo).withContext('activeLogo isnt truthy').toBeDefined();
+    expect(activeLogo.length).withContext('activeLogo isnt set').toBeGreaterThan(0);
     const initialGroup: Group = appInstance.getComparisonGroup();
-    expect(initialGroup).withContext('initialGroup isnt truthy').toBeDefined();
     appFixture.detectChanges();
     for (const group of Object.values(Group).filter(g => g != initialGroup)) {
-      //appInstance['updateGroupLogo'](group);
       appInstance.setComparisonGroup(group);
-      expect(sectionLogoDebug.componentInstance.logoUrl).withContext('logo url did not change').not.toEqual(activeLogo);
+      expect(sectionLogoDebug.componentInstance.logoUrl).withContext(`logo url did not change for group ${group}`).not.toEqual(activeLogo);
       activeLogo = sectionLogoDebug.componentInstance.logoUrl;
     }
   });
@@ -145,18 +141,13 @@ describe('AppComponent', () => {
     appInstance.showNote();
     appFixture.detectChanges();
     let noteDebug: DebugElement = appFixture.debugElement.query(By.directive(NoteComponent));
-    //let noteFixture: ComponentFixture<NoteComponent> = TestBed.createComponent(NoteComponent);
-    let noteInstance: NoteComponent = noteDebug.componentInstance; //noteFixture.componentInstance;
+    let noteInstance: NoteComponent = noteDebug.componentInstance; 
     let activeGroup: Group = appInstance.getComparisonGroup();
     let groupData: GroupData | null = appInstance.getGroupValues(activeGroup); 
-    expect(groupData)
-      .withContext('groupData was null')
-      .not.toBeNull();
-    expect(groupData?.note)
-      .withContext('GroupData.Note was null').not.toBeNull()
+    expect(groupData).withContext('groupData was null').not.toBeNull();
+    expect(groupData?.note).withContext('GroupData.Note was null').not.toBeNull()
     let note: Note = groupData?.note ?? new Note();
-    const noteText: string = 'this is a test, this is only a test.';
-    note.value = noteText;
+    note.value = 'this is a test, this is only a test.';
     note.isPrintable = true;
     appInstance.loadNoteIntoComponent(noteInstance);
     expect(noteInstance.groupName)
