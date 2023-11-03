@@ -10,16 +10,18 @@ export class GroupData {
     private _note: Note;
     private _fixes: Array<ILambdaValues>;
 
-    constructor() {
-        this._lambdaValues = null;
-        this._group = null;
+    constructor(group: Group, lambdaValues?: ILambdaValues) {
+        if (lambdaValues)
+            this._lambdaValues = lambdaValues;
+        else this._lambdaValues = null;
+        this._group = group;
         this._note = new Note();
         this._fixes = new Array<ILambdaValues>();
     }
 
-    get lambdaValues(): ILambdaValues {
-        if (!this._lambdaValues)
-            this._lambdaValues = new LambdaResult();
+    get lambdaValues(): ILambdaValues | null {
+        // if (!this._lambdaValues)
+        //     this._lambdaValues = new LambdaResult();
         return this._lambdaValues;
     }
     set lambdaValues(value: ILambdaValues) {

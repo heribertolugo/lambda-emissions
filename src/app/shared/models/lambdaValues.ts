@@ -97,4 +97,12 @@ export class LambdaValues implements ILambdaValues {
     readIndexedProp = (prop: string | symbol): any => {
         return this[prop];
     }
+
+    updateFrom(val: ILambdaValues): void {
+        const myProps: Array<string> = Object.keys(this);
+        Object.entries(val).forEach(([key, value])=> {
+            if (myProps.indexOf(key) > -1)
+                this[key] = value;
+        });
+    }
 }

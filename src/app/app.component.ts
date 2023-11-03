@@ -7,6 +7,7 @@ import { ILambdaValues } from './shared/models/IlambdaValues';
 import { HeaderComponent } from './header/header.component';
 import { Note } from './shared/models/note';
 import { NoteComponent } from './note/note.component';
+import { LambdaResult } from './shared/models/lambdaResult';
 
 /**
  * The app records values used to calculate Lambda and the result (Lambda, Air Fuel Ratio, Staus: Lean|Rich|Stoichiometric).
@@ -107,9 +108,18 @@ export class AppComponent {
   setComparisonGroup(val: Group): void {
     this.activeGroup = val;
     if (!this.comparisons.has(val))
-      this.comparisons.set(val, new GroupData());
+      this.comparisons.set(val, new GroupData(val, new LambdaResult()));
     this.updateGroupLogo(val);
     this.updateCalculator(val);
+  }
+  getComparisonGroup(): Group {
+    return this.activeGroup;
+  }
+  getGroupValues(group: Group): GroupData | null {
+    let data: GroupData | undefined;
+    if (this.comparisons.has(group) && (data = this.comparisons.get(group)))
+      return data; //this.comparisons.get(group)!;
+    return null;
   }
   /**
   * Changes/updates/sets the LambdaValues for the currently active group.
@@ -124,7 +134,7 @@ export class AppComponent {
   @ViewChild(LambdacalculatorComponent) lambdaCalculator:any
   private updateCalculator(val: Group) {
     if (this.comparisons.has(val))
-      this.lambdaCalculator?.updateFromExtern(this.comparisons.get(val)!.lambdaValues);
+      this.lambdaCalculator?.setLambdaValues(this.comparisons.get(val)!.lambdaValues);
   }
   /**
    * Changes the logo associated with the active group to the group provided.
