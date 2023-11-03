@@ -115,6 +115,12 @@ export class AppComponent {
   getComparisonGroup(): Group {
     return this.activeGroup;
   }
+  getGroupValues(group: Group): GroupData | null {
+    let data: GroupData | undefined;
+    if (this.comparisons.has(group) && (data = this.comparisons.get(group)))
+      return data; //this.comparisons.get(group)!;
+    return null;
+  }
   /**
   * Changes/updates/sets the LambdaValues for the currently active group.
   * @param val 
@@ -128,7 +134,7 @@ export class AppComponent {
   @ViewChild(LambdacalculatorComponent) lambdaCalculator:any
   private updateCalculator(val: Group) {
     if (this.comparisons.has(val))
-      this.lambdaCalculator?.updateFromExtern(this.comparisons.get(val)!.lambdaValues);
+      this.lambdaCalculator?.setLambdaValues(this.comparisons.get(val)!.lambdaValues);
   }
   /**
    * Changes the logo associated with the active group to the group provided.
