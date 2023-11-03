@@ -24,8 +24,8 @@ export class LambdacalculatorComponent {
   }
 
   // @Input() inputFromExtern: LambdaResult = new LambdaResult();
-  updateFromExtern(val: LambdaResult) {
-    this.lambdaValues = val;
+  setLambdaValues(val: ILambdaValues) {
+    this.lambdaValues.updateFrom(val);
   }
 
   getVal(ifLimit: boolean, group: Group, gas: string) {
