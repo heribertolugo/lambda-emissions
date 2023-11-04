@@ -18,3 +18,6 @@ result should be: Lambda = 1.076, AFR = 15.817:1, Status = Lean
 
 
 ![image](https://github.com/heribertolugo/lambda-emissions/assets/26213368/1ff7264e-8ad0-4f5b-8ae7-b13d7c44d2ed)
+
+
+![image](https://github.com/heribertolugo/lambda-emissions/assets/26213368/66dfb97a-b651-49c0-83a4-0fe74146797b)
