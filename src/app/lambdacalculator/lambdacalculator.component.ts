@@ -25,7 +25,7 @@ export class LambdacalculatorComponent {
 
   // @Input() inputFromExtern: LambdaResult = new LambdaResult();
   setLambdaValues(val: ILambdaValues) {
-    this.lambdaValues.updateFrom(val);
+    this.lambdaValues = val as LambdaResult;
   }
 
   getVal(ifLimit: boolean, group: Group, gas: string) {
@@ -41,7 +41,7 @@ export class LambdacalculatorComponent {
   }
 
   reset(): void {
-    this.lambdaValues = new LambdaResult();
+    this.lambdaValues.reset();
     this.updateEquationUi(true);
   }
 
@@ -50,7 +50,6 @@ export class LambdacalculatorComponent {
   calcIt() {
     let result = this.calculateLambda();
     
-    console.log(result);
     this.updateEquationUi(result <= 0);
     this.valuesChanged.emit(this.lambdaValues);
   }
@@ -114,7 +113,7 @@ export class LambdacalculatorComponent {
   @ViewChild(LambdaequationComponent) child:any;
   private updateEquationUi(reset: boolean = false): void {
     if (reset)
-      this.child.lambdaValues = new LambdaValues();
+      this.child.lambdaValues.reset();
     else
       this.child.lambdaValues = this.lambdaValues;
   }
