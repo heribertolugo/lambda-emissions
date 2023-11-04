@@ -8,6 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { Note } from './shared/models/note';
 import { NoteComponent } from './note/note.component';
 import { LambdaResult } from './shared/models/lambdaResult';
+import { group } from '@angular/animations';
 
 /**
  * The app records values used to calculate Lambda and the result (Lambda, Air Fuel Ratio, Staus: Lean|Rich|Stoichiometric).
