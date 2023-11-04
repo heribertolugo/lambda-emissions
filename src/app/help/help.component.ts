@@ -32,13 +32,27 @@ equal 1. Modern fuel sytems generaly operate in a range of &#955; = \
 1 &plusmn; .01 under steady-state conditions.\
 `],
     ['How to use Lambda Diagnostics.',
-    '1'],
+'\
+Enter the values for the gasses and then hit submit. The Lambda and Air Fuel Ratio will be calculated and shown below. \
+In addition Status will display whether the vehicle is running Rich, Lean or Stoichiometric. \
+The values entered will be saved in a "group". There are 4 groups in which you can save gas values along with the results. \
+The 4 groups are "Lambda", "Idle", "Cruise" and "Custom". These groups allow you to perform repairs &/or modifications, re-run the gas analyzer and record the new results. \
+Saving the values and results for diffferent conditions allows you to compare them and determine if you are heading in the correct course of action. \
+To change from one group to another simply click on the group name you wish to enter using the buttons on the bottom left. \
+You can save a note/comment for each group by clicking the note button. The note will automatically save upon closing the note. \
+Checking the "add to final print" in the note window will add the note below the results when the results are printed. \
+'],
     ['How will Lambda Diagnostics help me?',
-    '2'],
+'\
+\
+'],
     ['How accurate is Lambda?',
-    '3'],
+'The Brettshneider equation (Lambda) is used by leading automotive companies and gas analyzers accross the world. '],
     ['What are Lambda comparisons?',
-    '4'],
+'\
+The Lambda comparisons allow you to save your values along with results and an optional note in each of the 4 different groups. \
+You can use these to compare different scenarios when working on a vehicle to diagnose an imbalance. \
+'],
     ['What is "Limit" section for?',
     '5'],
     ['What is "Note" for?',
