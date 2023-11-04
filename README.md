@@ -13,4 +13,8 @@ A keen technician can claim to be able to determine rich or lean condition just 
 you can use the following values to test: HC: 834 ppm, CO: .01%, CO2: 13.78%, O2: 2.29%\
 result should be: Lambda = 1.076, AFR = 15.817:1, Status = Lean
 
-![image](https://github.com/heribertolugo/lambda-emissions/assets/26213368/cdfd093f-a3fc-4194-8402-ffe456fd5e52)
+
+![lambda](https://github.com/heribertolugo/lambda-emissions/assets/26213368/5b78c6d8-5ba4-42ab-890e-94dbee62e63c)
+
+
+![image](https://github.com/heribertolugo/lambda-emissions/assets/26213368/1ff7264e-8ad0-4f5b-8ae7-b13d7c44d2ed)
