@@ -17,4 +17,6 @@ export interface ILambdaValues {
     K1_desc: string;
 
     isValid(): boolean;
+    updateFrom(val: ILambdaValues): void;
+    reset(): void;
 }
