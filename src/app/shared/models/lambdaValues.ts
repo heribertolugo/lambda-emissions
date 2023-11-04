@@ -105,4 +105,8 @@ export class LambdaValues implements ILambdaValues {
                 this[key] = value;
         });
     }
+
+    reset(): void {
+        this.updateFrom(new LambdaValues());
+    }
 }
