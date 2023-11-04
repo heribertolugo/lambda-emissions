@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { LambdaActionService } from './services/lambda-action.service';
 import { Group } from './shared/enums/groups';
 import { GroupData } from './shared/models/groupData';
@@ -42,7 +42,7 @@ import { LambdaResult } from './shared/models/lambdaResult';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Lambda Diagnostics';
 
   constructor(private _actionService: LambdaActionService) {
@@ -59,6 +59,7 @@ export class AppComponent {
      * initialize our default values throught the app
      */
     this.setComparisonGroup(Group.Lambda);
+    this.preloadImages();
   }
 
   doExit(): void {
@@ -147,6 +148,24 @@ export class AppComponent {
   closeHelp(): void {
     this.openHelp = false;
   }
+
+private preloadImages() {
+  const buttons = [
+    { src: '/assets/images/lamButOver.gif', size: {width: 94,height: 36} },
+    { src: '/assets/images/idleButOver.gif', size: {width: 94,height: 36} },
+    { src: '/assets/images/cruiseButOver.gif', size: {width: 94,height: 36} },
+    { src: '/assets/images/cusButOver.gif', size: {width: 94,height: 36} },
+    { src: '/assets/images/noteButOver.gif', size: {width: 151,height: 44} },
+    { src: '/assets/images/prntButOver.gif', size: {width: 125,height: 44} },
+    { src: '/assets/images/helpButOver.gif', size: {width: 182,height: 46} },
+    { src: '/assets/images/exitButOver.gif', size: {width: 94,height: 46} }
+  ];
+
+  buttons.forEach(b => {
+    let nav = new Image(b.size.width, b.size.height);
+    nav.src = b.src;
+  });
+}
   /**
    * Bound to the visibilit of the NoteComponent
    */
